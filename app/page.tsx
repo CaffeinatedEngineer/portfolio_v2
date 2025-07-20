@@ -3,6 +3,9 @@
 import { navItems } from "@/data";
 import { useEffect, useState } from "react";
 
+// Force dynamic rendering to prevent SSR issues
+export const dynamic = 'force-dynamic';
+
 import Hero from "@/components/Hero";
 import Grid from "@/components/Grid";
 import Footer from "@/components/Footer";
