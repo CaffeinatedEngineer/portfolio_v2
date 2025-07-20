@@ -2,77 +2,13 @@ import { FaLocationArrow } from "react-icons/fa6";
 import MagicButton from "./MagicButton";
 import { Spotlight } from "./ui/Spotlight";
 import { TextGenerateEffect } from "./ui/TextGenerateEffect";
-import Particles from "react-tsparticles";
-import { loadFull } from "tsparticles";
-import { useCallback } from "react";
-import type { Engine } from "tsparticles-engine";
-import type { Container } from "tsparticles-engine";
 
 
 const Hero = () => {
-  const particlesInit = useCallback(async (engine: Engine) => {
-    // This adds the bundle to tsParticles
-    // Using loadFull to load all tsParticles features
-    try {
-      await loadFull(engine);
-    } catch (error) {
-      console.error("Error initializing tsParticles:", error);
-    }
-  }, []);
-
-  const particlesLoaded = useCallback(async (container: Container | undefined) => {
-    console.log(container);
-  }, []);
 
   return (
     <div className="pb-20 pt-36 relative">
-      <Particles
-        id="tsparticles"
-        init={particlesInit}
-        loaded={particlesLoaded}
-        options={{
-          fpsLimit: 60,
-          interactivity: {
-            events: {
-              onClick: { enable: true, mode: "push" },
-              onHover: { enable: true, mode: "repulse" },
-              resize: true,
-            },
-            modes: {
-              push: { quantity: 4 },
-              repulse: { distance: 200, duration: 0.4 },
-            },
-          },
-          particles: {
-            color: { value: "#ffffff" },
-            links: {
-              color: "#ffffff",
-              distance: 140,
-              enable: true,
-              opacity: 0.6,
-              width: 1.1,
-            },
-            collisions: { enable: true },
-            move: {
-              direction: "none",
-              enable: true,
-              outMode: "bounce",
-              random: false,
-              speed: 2,
-              straight: false,
-            },
-            number: {
-              density: { enable: true, area: 800 },
-              value: 30,
-            },
-            opacity: { value: 0.6 },
-            shape: { type: "circle" },
-            size: { random: true, value: 3 },
-          },
-          detectRetina: true,
-        }}
-        className="absolute top-0 left-0 w-full h-full z-0"
-      />
+      {/* Particles disabled temporarily for build compatibility */}
 
       {/* Your existing Spotlight and content */}
       <div>
