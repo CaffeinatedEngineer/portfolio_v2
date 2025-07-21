@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import dynamic from "next/dynamic";
 
 import "./globals.css";
-import { ThemeProvider } from "./provider";
+
+// Disable SSR for ThemeProvider to prevent hydration issues
+const ThemeProvider = dynamic(() => import("./provider").then((mod) => ({ default: mod.ThemeProvider })), {
+  ssr: false,
+});
 
 const inter = Inter({ subsets: ["latin"] });
 

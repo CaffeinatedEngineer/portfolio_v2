@@ -2,18 +2,20 @@
 
 import { navItems } from "@/data";
 import { useEffect, useState } from "react";
+import dynamicImport from "next/dynamic";
 
 // Force dynamic rendering to prevent SSR issues
 export const dynamic = 'force-dynamic';
 
-import Hero from "@/components/Hero";
-import Grid from "@/components/Grid";
-import Footer from "@/components/Footer";
-import Clients from "@/components/Clients";
-import Approach from "@/components/Approach";
-import Experience from "@/components/Experience";
-import RecentProjects from "@/components/RecentProjects";
-import { FloatingNav } from "@/components/ui/FloatingNavbar";
+// Dynamic imports to disable SSR for potentially problematic components
+const Hero = dynamicImport(() => import("@/components/Hero"), { ssr: false });
+const Grid = dynamicImport(() => import("@/components/Grid"), { ssr: false });
+const Footer = dynamicImport(() => import("@/components/Footer"), { ssr: false });
+const Clients = dynamicImport(() => import("@/components/Clients"), { ssr: false });
+const Approach = dynamicImport(() => import("@/components/Approach"), { ssr: false });
+const Experience = dynamicImport(() => import("@/components/Experience"), { ssr: false });
+const RecentProjects = dynamicImport(() => import("@/components/RecentProjects"), { ssr: false });
+const FloatingNav = dynamicImport(() => import("@/components/ui/FloatingNavbar").then((mod) => ({ default: mod.FloatingNav })), { ssr: false });
 
 const Home = () => {
   const [mounted, setMounted] = useState(false);
