@@ -40,23 +40,30 @@ export const BackgroundGradientAnimation = ({
   const [tgX, setTgX] = useState(0);
   const [tgY, setTgY] = useState(0);
   useEffect(() => {
-    if (typeof document !== 'undefined') {
-      document.body.style.setProperty(
-        "--gradient-background-start",
-        gradientBackgroundStart
-      );
-      document.body.style.setProperty(
-        "--gradient-background-end",
-        gradientBackgroundEnd
-      );
-      document.body.style.setProperty("--first-color", firstColor);
-      document.body.style.setProperty("--second-color", secondColor);
-      document.body.style.setProperty("--third-color", thirdColor);
-      document.body.style.setProperty("--fourth-color", fourthColor);
-      document.body.style.setProperty("--fifth-color", fifthColor);
-      document.body.style.setProperty("--pointer-color", pointerColor);
-      document.body.style.setProperty("--size", size);
-      document.body.style.setProperty("--blending-value", blendingValue);
+    // Only run on client-side
+    if (typeof document !== 'undefined' && typeof window !== 'undefined') {
+      // Use a style element instead of setting properties on body
+      let styleEl = document.getElementById('gradient-bg-styles');
+      if (!styleEl) {
+        styleEl = document.createElement('style');
+        styleEl.id = 'gradient-bg-styles';
+        document.head.appendChild(styleEl);
+      }
+      
+      styleEl.textContent = `
+        :root {
+          --gradient-background-start: ${gradientBackgroundStart};
+          --gradient-background-end: ${gradientBackgroundEnd};
+          --first-color: ${firstColor};
+          --second-color: ${secondColor};
+          --third-color: ${thirdColor};
+          --fourth-color: ${fourthColor};
+          --fifth-color: ${fifthColor};
+          --pointer-color: ${pointerColor};
+          --size: ${size};
+          --blending-value: ${blendingValue};
+        }
+      `;
     }
   }, [blendingValue, fifthColor, firstColor, fourthColor, gradientBackgroundEnd, gradientBackgroundStart, pointerColor, secondColor, size, thirdColor]);
 
@@ -85,7 +92,9 @@ export const BackgroundGradientAnimation = ({
 
   const [isSafari, setIsSafari] = useState(false);
   useEffect(() => {
-    if (typeof navigator !== 'undefined') {
+    // Only run on client-side
+    if (typeof navigator !== 'undefined' && typeof window !== 'undefined') {
+      // Check for Safari browser
       setIsSafari(/^((?!chrome|android).)*safari/i.test(navigator.userAgent));
     }
   }, []);

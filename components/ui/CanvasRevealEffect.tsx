@@ -1,7 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import React, { useMemo, useRef } from "react";
+import React, { useMemo, useRef, useState, useEffect } from "react";
 import * as THREE from "three";
 
 export const CanvasRevealEffect = ({
@@ -23,23 +23,32 @@ export const CanvasRevealEffect = ({
   dotSize?: number;
   showGradient?: boolean;
 }) => {
+  const [isMounted, setIsMounted] = useState(false);
+  
+  useEffect(() => {
+    setIsMounted(true);
+    return () => setIsMounted(false);
+  }, []);
+  
   return (
     <div className={cn("h-full relative bg-white w-full", containerClassName)}>
       <div className="h-full w-full">
-        <DotMatrix
-          colors={colors ?? [[0, 255, 255]]}
-          dotSize={dotSize ?? 3}
-          opacities={
-            opacities ?? [0.3, 0.3, 0.3, 0.5, 0.5, 0.5, 0.8, 0.8, 0.8, 1]
-          }
-          shader={`
-              float animation_speed_factor = ${animationSpeed.toFixed(1)};
-              float intro_offset = distance(u_resolution / 2.0 / u_total_size, st2) * 0.01 + (random(st2) * 0.15);
-              opacity *= step(intro_offset, u_time * animation_speed_factor);
-              opacity *= clamp((1.0 - step(intro_offset + 0.1, u_time * animation_speed_factor)) * 1.25, 1.0, 1.25);
-            `}
-          center={["x", "y"]}
-        />
+        {isMounted && (
+          <DotMatrix
+            colors={colors ?? [[0, 255, 255]]}
+            dotSize={dotSize ?? 3}
+            opacities={
+              opacities ?? [0.3, 0.3, 0.3, 0.5, 0.5, 0.5, 0.8, 0.8, 0.8, 1]
+            }
+            shader={`
+                float animation_speed_factor = ${animationSpeed.toFixed(1)};
+                float intro_offset = distance(u_resolution / 2.0 / u_total_size, st2) * 0.01 + (random(st2) * 0.15);
+                opacity *= step(intro_offset, u_time * animation_speed_factor);
+                opacity *= clamp((1.0 - step(intro_offset + 0.1, u_time * animation_speed_factor)) * 1.25, 1.0, 1.25);
+              `}
+            center={["x", "y"]}
+          />
+        )}
       </div>
       {showGradient && (
         <div className="absolute inset-0 bg-gradient-to-t from-gray-950 to-[84%]" />
@@ -65,6 +74,13 @@ const DotMatrix: React.FC<DotMatrixProps> = ({
   shader = "",
   center = ["x", "y"],
 }) => {
+  const [isMounted, setIsMounted] = useState(false);
+  
+  useEffect(() => {
+    setIsMounted(true);
+    return () => setIsMounted(false);
+  }, []);
+  
   const uniforms = React.useMemo(() => {
     let colorsArray = [
       colors[0],
@@ -118,6 +134,10 @@ const DotMatrix: React.FC<DotMatrixProps> = ({
     };
   }, [colors, opacities, totalSize, dotSize]);
 
+  if (!isMounted) {
+    return null;
+  }
+  
   return (
     <Shader
       source={`
@@ -194,9 +214,15 @@ const ShaderMaterial = ({
   const { size } = useThree();
   const ref = useRef<THREE.Mesh>();
   let lastFrameTime = 0;
+  const [isMounted, setIsMounted] = useState(false);
+  
+  useEffect(() => {
+    setIsMounted(true);
+    return () => setIsMounted(false);
+  }, []);
 
   useFrame(({ clock }) => {
-    if (!ref.current) return;
+    if (!isMounted || !ref.current) return;
     const timestamp = clock.getElapsedTime();
     if (timestamp - lastFrameTime < 1 / maxFps) {
       return;
@@ -256,6 +282,8 @@ const ShaderMaterial = ({
 
   // Shader material
   const material = useMemo(() => {
+    if (!isMounted) return null;
+    
     const materialObject = new THREE.ShaderMaterial({
       vertexShader: `
       precision mediump float;
@@ -279,8 +307,12 @@ const ShaderMaterial = ({
     });
 
     return materialObject;
-  }, [size.width, size.height, source]);
+  }, [size.width, size.height, source, isMounted]);
 
+  if (!isMounted || !material) {
+    return null;
+  }
+  
   return (
     <mesh ref={ref as any}>
       <planeGeometry args={[2, 2]} />
@@ -290,6 +322,19 @@ const ShaderMaterial = ({
 };
 
 const Shader: React.FC<ShaderProps> = ({ source, uniforms, maxFps = 60 }) => {
+  // Use React's useState and useEffect to ensure client-side only rendering
+  const [isMounted, setIsMounted] = React.useState(false);
+  
+  React.useEffect(() => {
+    setIsMounted(true);
+    return () => setIsMounted(false);
+  }, []);
+  
+  // Only render the Canvas component on the client-side
+  if (!isMounted) {
+    return null;
+  }
+  
   return (
     <Canvas className="absolute inset-0  h-full w-full">
       <ShaderMaterial source={source} uniforms={uniforms} maxFps={maxFps} />
