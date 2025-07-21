@@ -1,0 +1,13 @@
+[build]
+  command = "npm run build"
+  publish = "out"
+
+# Set environment variables
+[build.environment]
+  NETLIFY_NEXT_PLUGIN_SKIP = "true"
+
+# Handle SPA routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
