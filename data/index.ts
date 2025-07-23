@@ -107,6 +107,7 @@ export const projects = [
 
 export const testimonials = [
   {
+    id: 1,
     quote:
       "Shashank has been an invaluable asset to our team. His Management skills and problem-solving abilities have consistently impressed us. He is not only a talented developer but also a great team player. I highly recommend him.",
     name: "Dr. V. Muthumanikandan",
@@ -114,10 +115,26 @@ export const testimonials = [
   },
 
   {
+    id: 2,
     quote:
       "Shashank is a talented developer with a strong work ethic. He has a knack for solving complex problems and is always eager to learn new technologies. I have no doubt that he will excel in his future endeavors.",
     name: "Amrit Kumar Mishra",
     title: "Full Stack Developer",
+  },
+
+  {
+    id: 3,
+    quote:
+      "Shashank is a hardworking and dedicated individual. He consistently demonstrates his ability to work in a team and complete tasks on time. I highly recommend him for any future projects.",
+    name: "Grecil Unadkat",
+    title: "Full Stack Developer",
+  },
+  {
+    id: 4,
+    quote:
+      "Shashank is a hardworking and dedicated individual. He consistently demonstrates his ability to work in a team and complete tasks on time. I highly recommend him for any future projects.",
+    name: "Shuktika Shreyasi",
+    title: "AI/ML Engineer",
   },
 ];
 
@@ -139,7 +156,7 @@ export const workExperience = [
   {
     id: 3,
     title: "Ongoing Research Internship",
-    desc: "Currently working on LoRa_IoT enabled Applications with DL/ML Data Analytics",
+    desc: "Cloud-Aware Hybrid ECC-AES Encryption",
     className: "md:col-span-2", // change to md:col-span-2
     thumbnail: "/exp3.svg",
   },
