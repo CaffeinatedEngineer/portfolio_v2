@@ -2,13 +2,22 @@ import { FaLocationArrow } from "react-icons/fa6";
 import MagicButton from "./MagicButton";
 import { Spotlight } from "./ui/Spotlight";
 import { TextGenerateEffect } from "./ui/TextGenerateEffect";
+import ParticlesBackground from "./ui/Particles";
 
 
 const Hero = () => {
 
   return (
     <div className="pb-20 pt-36 relative">
-      {/* Particles disabled temporarily for build compatibility */}
+      {/* Hero-specific particles with more intensity */}
+      <ParticlesBackground 
+        className="absolute inset-0 z-0" 
+        particleColor="#ffffff" 
+        particleCount={100} 
+        speed={0.8} 
+        opacity={0.4} 
+        particleSize={2}
+      />
 
       {/* Your existing Spotlight and content */}
       <div>

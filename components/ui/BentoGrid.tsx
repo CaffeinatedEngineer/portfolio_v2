@@ -1,5 +1,3 @@
-"use client";
-
 import { useState } from "react";
 import { IoCopyOutline } from "react-icons/io5";
 
@@ -80,7 +78,7 @@ export const BentoGridItem = ({
         .catch(err => {
           console.error('Failed to copy text: ', err);
         });
-    } else if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+    } else {
       // Fallback for environments where clipboard API is not available
       const textArea = document.createElement('textarea');
       textArea.value = text;
