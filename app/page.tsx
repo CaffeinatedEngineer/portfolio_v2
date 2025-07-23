@@ -3,6 +3,7 @@
 import { navItems } from "@/data";
 import { useEffect, useState } from "react";
 import dynamicImport from "next/dynamic";
+import ParticlesBackground from "@/components/ui/Particles";
 
 // Force dynamic rendering to prevent SSR issues
 export const dynamic = 'force-dynamic';
@@ -38,12 +39,19 @@ const Home = () => {
 
   return (
     <main className="relative bg-black flex justify-center items-center flex-col overflow-hidden mx-auto sm:px-10 px-5">
-      <div className="max-w-7xl w-full">
+      <ParticlesBackground 
+        className="absolute inset-0 z-0" 
+        particleColor="#CBACF9" 
+        particleCount={60} 
+        speed={0.5} 
+        opacity={0.3} 
+      />
+      <div className="max-w-7xl w-full relative z-10">
         <FloatingNav navItems={navItems} />
         <Hero />
         <Grid />
         <RecentProjects />
-        {/* <Clients /> */}
+        <Clients />
         <Experience />
         <Approach />
         <Footer />
