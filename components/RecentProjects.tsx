@@ -19,8 +19,8 @@ const RecentProjects = () => {
             key={item.id}
           >
             <PinContainer
-              title="/ui.aceternity.com"
-              href="https://twitter.com/mannupaaji"
+              title={item.title}
+              href={item.link}
             >
               <div className="relative flex items-center justify-center sm:w-96 w-[80vw] overflow-hidden h-[20vh] lg:h-[30vh] mb-10">
                 <div
@@ -67,7 +67,7 @@ const RecentProjects = () => {
 
                 <div className="flex justify-center items-center">
                   <p className="flex lg:text-xl md:text-xs text-sm text-purple">
-                    Check Live Site
+                    {item.link.startsWith("https://github.com") ? "GitHub Repo" : "Live Site"}
                   </p>
                   <FaLocationArrow className="ms-3" color="#CBACF9" />
                 </div>
@@ -75,6 +75,14 @@ const RecentProjects = () => {
             </PinContainer>
           </div>
         ))}
+      </div>
+      <div className="flex justify-center mt-10">
+        <a href="https://github.com/CaffeinatedEngineer" target="_blank" rel="noopener noreferrer">
+          <button className="p-4 rounded-lg border border-purple-500 bg-purple-600 text-white text-lg font-semibold flex items-center space-x-2 hover:bg-purple-700 transition-colors">
+            <span>See All Projects</span>
+            <img src="/git.svg" alt="GitHub" className="w-6 h-6" />
+          </button>
+        </a>
       </div>
     </div>
   );
