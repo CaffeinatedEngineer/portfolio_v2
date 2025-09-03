@@ -1,8 +1,9 @@
 export const navItems = [
   { name: "About", link: "#about" },
-  { name: "Projects", link: "#projects" },
+  { name: "Projects", link: "#RecentProjects" },
   { name: "Testimonials", link: "#testimonials" },
   { name: "Contact", link: "#contact" },
+  { name: "Resume", link: "/Shashank_CV.pdf" },
 ];
 
 export const gridItems = [
@@ -77,31 +78,15 @@ export const projects = [
     des: "A SaaS application which summarizes long PDFs into cheatsheets.",
     img: "/p1.png",
     iconLists: ["/re.svg", "/tail.svg", "/ts.svg", "/three.svg", "/fm.svg"],
-    link: "/aizuma.vercel.app",
+    link: "https://thezuma.xyz",
   },
   {
     id: 2,
-    title: "Uptimer",
-    des: "A web3 based application which notifies the owner in case the website is down.",
-    img: "/p2.png",
+    title: "Avolink",
+    des: "A platform to host and join events events with zero-knowledge proof tickets, instant payouts, and proof of attendance NFTs",
+    img: "/avolink.png",
     iconLists: ["/next.svg", "/tail.svg", "/ts.svg", "/stream.svg", "/c.svg"],
-    link: "/",
-  },
-  {
-    id: 3,
-    title: "Coming Soon",
-    des: "Details coming soon",
-    img: "/csoon.jpg",
-    iconLists: ["/re.svg", "/tail.svg", "/ts.svg", "/three.svg", "/c.svg"],
-    link: "/",
-  },
-  {
-    id: 4,
-    title: "Coming Soon",
-    des: "Details coming soon",
-    img: "/csoon.jpg",
-    iconLists: ["/next.svg", "/tail.svg", "/ts.svg", "/three.svg", "/gsap.svg"],
-    link: "/",
+    link: "https://avolink.netlify.app",
   },
 ];
 
@@ -112,6 +97,7 @@ export const testimonials = [
       "Shashank has been an invaluable asset to our team. His Management skills and problem-solving abilities have consistently impressed us. He is not only a talented developer but also a great team player. I highly recommend him.",
     name: "Dr. V. Muthumanikandan",
     title: "Faculty Coordinator-Hackclub",
+    img: "/muthu.jpg",
   },
 
   {
@@ -120,6 +106,7 @@ export const testimonials = [
       "Shashank is a talented developer with a strong work ethic. He has a knack for solving complex problems and is always eager to learn new technologies. I have no doubt that he will excel in his future endeavors.",
     name: "Amrit Kumar Mishra",
     title: "Full Stack Developer",
+    img: "/amrit.png",
   },
 
   {
@@ -128,6 +115,8 @@ export const testimonials = [
       "Shashank is a hardworking and dedicated individual. He consistently demonstrates his ability to work in a team and complete tasks on time. I highly recommend him for any future projects.",
     name: "Grecil Unadkat",
     title: "Full Stack Developer",
+    img: "/grecll.jpeg",
+
   },
   {
     id: 4,
@@ -135,6 +124,7 @@ export const testimonials = [
       "Shashank is a hardworking and dedicated individual. He consistently demonstrates his ability to work in a team and complete tasks on time. I highly recommend him for any future projects.",
     name: "Shuktika Shreyasi",
     title: "AI/ML Engineer",
+    img: "/shuktika.png",
   },
 ];
 
@@ -148,8 +138,8 @@ export const workExperience = [
   },
   {
     id: 2,
-    title: "Mobile App Dev - Intern",
-    desc: "Designed and developed mobile app for both iOS & Android platforms using React Native.",
+    title: "College Dream - Intern",
+    desc: "Developed comprehensive event management portal serving 2000+ students with minimalist UI and optimized scrolling performance.",
     className: "md:col-span-2", // change to md:col-span-2
     thumbnail: "/exp2.svg",
   },
@@ -173,14 +163,16 @@ export const socialMedia = [
   {
     id: 1,
     img: "/git.svg",
-    href: "https://github.com/CaffeinatedEngineer",
+    href: "https://github.com/CaffeinatedEngineer"
   },
   {
     id: 2,
-    img: "/twit.svg",
+    img: "/x.svg",
+    href: "https://github.com/CaffeinatedEngineer"
   },
   {
     id: 3,
     img: "/link.svg",
+    href: "https://github.com/CaffeinatedEngineer"
   },
 ];
